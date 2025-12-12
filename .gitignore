@@ -1,0 +1,9 @@
+# Python
+__pycache__/
+*.pyc
+*.venv
+
+# Discord Bot
+.env
+bot_config.db
+data/
