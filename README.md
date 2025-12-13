@@ -71,19 +71,19 @@ The bot will connect to Discord, sync the slash commands (/), and will be ready 
 ## 📂 Project Structure
 The bot uses a modular architecture based on Cogs, making it easy to add new functionalities.
 
-translator-bot/
-├─ bot.py               - Main entry point
-├─ .env                 - Environment variables
-├─ requirements.txt     - Dependencies
-├─ bot_config.db        - SQLite database file (persistent)
-├─ utils/
-│  ├─ db_manager.py     - DB Logic: get_config, update_config (SQLite)
-│  └─ translator.py     - Translation utilities (Deep Translator, language detection)
-└─ cogs/
-   ├─ admin.py          - /set-language and /toggle_auto commands
-   ├─ context_translate.py - Right-click context menu
-   ├─ reactions.py      - Emoji reaction translation logic
-   └─ auto_server.py    - on_message listener for automatic translation
+* translator-bot/
+* ├─ bot.py               - Main entry point
+* ├─ .env                 - Environment variables
+* ├─ requirements.txt     - Dependencies
+* ├─ bot_config.db        - SQLite database file (persistent)
+* ├─ utils/
+* │  ├─ db_manager.py     - DB Logic: get_config, update_config (SQLite)
+* │  └─ translator.py     - Translation utilities (Deep Translator, language detection)
+* └─ cogs/
+*    ├─ admin.py          - /set-language and /toggle_auto commands
+*    ├─ context_translate.py - Right-click context menu
+*    ├─ reactions.py      - Emoji reaction translation logic
+*    └─ auto_server.py    - on_message listener for automatic translation
    
 ## ☁️ Production Deployment (24/7)
 This bot is structured to be deployed on hosting services that support containers, such as Railway.
