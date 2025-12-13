@@ -1,6 +1,5 @@
 import sqlite3
 import os
-import path
 
 DB_NAME = 'bot_config.db'
 DATA_DIR = 'data' 
