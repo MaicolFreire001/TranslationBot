@@ -1,9 +1,11 @@
 import sqlite3
 import os
+import path
 
 DB_NAME = 'bot_config.db'
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DB_PATH = os.path.join(BASE_DIR, DB_NAME)
+DATA_DIR = 'data' 
+
+DB_PATH = os.path.join("/", "app", DATA_DIR, DB_NAME)
 DEFAULT_CONFIG = {
     "auto": False,
     "lang": "es"
