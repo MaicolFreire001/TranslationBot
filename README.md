@@ -85,22 +85,31 @@ The bot uses a modular architecture based on Cogs, making it easy to add new fun
 *    ├─ reactions.py      - Emoji reaction translation logic
 *    └─ auto_server.py    - on_message listener for automatic translation
    
-## ☁️ Production Deployment (24/7)
-This bot is structured to be deployed on hosting services that support containers, such as Railway.
+## ☁️ Production Deployment (24/7) - Render
 
-#### Railway Configuration
-To maintain the persistence of the configuration data (bot_config.db) across restarts and deployments, you must configure an External Volume in Railway.
+This bot is configured to be deployed on **Render**, which offers a permanent free tier suitable for Discord bots. Render will keep the bot running with the following key configurations:
 
-#### Git Connection: Connect Railway to your repository.
+### Render Configuration
 
-#### Variables: Add the DISCORD_TOKEN and APP_ID variables to Railway's Environment Variables.
+To ensure your bot maintains **SQLite** database persistence, you must set it up as a **Cron Job** and not a standard Web Service, as Render's free Web Service does not allow file persistence.
 
-#### Persistence: Create a Volume service in Railway (e.g., bot-data).
+1.  **Repo Setup:** Connect Render to your GitHub repository.
+2.  **Service Type:** Create a **Cron Job** (Not a Web Service).
+    * **Reason:** Render's free Web Services are ephemeral and delete the `bot_config.db` database on every redeploy or restart. Cron Jobs, by running the bot command once indefinitely, offer more stability for simple file persistence.
 
-#### Volume Mount: Mount the created volume to the path /app/data. Your utils/db_manager.py file must be configured to point to this location (/app/data/bot_config.db).
+3.  **Cron Job Configuration:**
+    * **Environment:** Python 3
+    * **Build Command:** `pip install -r requirements.txt`
+    * **Start Command:** `python bot.py`
+    * **Schedule:** Use a Cron syntax to execute the command once but keep it active (e.g., `0 0 1 1 *` or `0 0 1 1 1`).
 
-#### The Procfile in the root directs the execution:
-```bash
-web: python bot.py
-```
+4.  **Environment Variables:**
+    * Add the `DISCORD_TOKEN` and `APP_ID` variables (and `GUILD_ID` if used for development).
+
+### ⚠️ Important Note on Persistence
+
+* Render does not offer true persistent storage (Volumes) on the Free Tier.
+* **Ensure your `utils/db_manager.py` attempts to create the database (`bot_config.db`) in the application directory if it doesn't exist.** When using a Cron Job, this database file *usually* persists through service idle cycles, provided there isn't a *re-deploy* or forced rebuild. For critical long-term data persistence, you should consider a free external database (like MongoDB Atlas Free Tier).
+
+  
 #### Developed by: [Maicol Freire / https://github.com/MaicolFreire001]
