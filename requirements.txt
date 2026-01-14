@@ -2,3 +2,6 @@ discord.py>=2.3.2
 deep-translator>=1.9.1
 python-dotenv
 langdetect
+pymongo
+dnspython
+flask
