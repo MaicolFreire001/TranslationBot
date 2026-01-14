@@ -1,0 +1,17 @@
+{
+  "$schema": "https://railway.app/schemas/project-build.json",
+  "build": {
+    "builder": "nixpacks",
+    "buildCommand": "pip install -r requirements.txt",
+    "rootDirectory": "/"
+  },
+  "deploy": {
+    "startCommand": "python bot.py",
+    "volumeMounts": [
+      {
+        "name": "bot-data",
+        "path": "/app"
+      }
+    ]
+  }
+}
