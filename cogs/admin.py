@@ -35,7 +35,7 @@ class LanguageSelect(discord.ui.Select):
         )
 
     async def callback(self, interaction: discord.Interaction):
-        update_config(interaction.guild_id, "lang", self.values[0])
+        update_config(interaction.guild_id, lang=self.values[0])
         
         selected_name = next((name for name, code in LANGUAGES.items() if code == self.values[0]), self.values[0])
 
@@ -86,7 +86,7 @@ class Admin(commands.Cog):
         current = cfg.get("auto", False)
         
         new_state = not current
-        update_config(interaction.guild_id, "auto", new_state)
+        update_config(interaction.guild_id, auto=new_state)
 
         state = "enabled" if new_state else "disabled"
         

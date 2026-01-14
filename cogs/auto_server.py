@@ -19,7 +19,7 @@ class AutoTranslate(commands.Cog):
         
         config = get_config(guild_id)
         
-        if not config['auto']: return 
+        if not config.get('auto', False): return
         
         translated, detected_lang = await translate_text(
             message.content,
